@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-notes-cache-v1';
+const CACHE_NAME = 'pwa-notes-cache-v1.0.1';
 const PRECACHE_URLS = [
     '/',
     '/index.html',
