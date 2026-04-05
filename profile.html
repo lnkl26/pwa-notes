@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User Profile</title>
+        <link rel="manifest" href="manifest.json">
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+        <script src="pwa.js" defer></script>
+
+    </head>
+    <body>
+        <h1>New User? Sign up to save your notes.</h1>
+        <form id="signup">
+            <label for="newemail">Your Email: </label>
+            <input type="text" id="newemail" name="newemail" placeholder="ex. you@example.com" required>
+            <input type="submit" value="Sign Up">
+        </form>
+        <h1>Existing User? Log in to sync your notes.</h1>
+        <form id="login">
+            <label for="existemail">Your Email: </label>
+            <input type="text" id="existemail" name="existemail" placeholder="ex. you@example.com" required>
+            <input type="submit" value="Log In">
+        </form>
+    </body>
+</html>

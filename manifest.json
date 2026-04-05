@@ -1,0 +1,6 @@
+{
+    "name": "pwa-notes",
+    "start_url": "index.html",
+    "display": "standalone",
+    "prefer_related_applications": false
+}
