@@ -13,7 +13,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    const userId = session.user.id; // UUID string
+    const userId = session.user.id;
+
+    // Simple escaping to avoid injecting HTML from note content  
+    function escapeHtml(s) {
+        return String(s)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
+    }
 
     async function loadNotes() {
         const { data: notes, error } = await supabaseClient
@@ -37,11 +47,53 @@ document.addEventListener('DOMContentLoaded', async () => {
         notes.forEach(note => {
             const noteEl = document.createElement('div');
             noteEl.className = 'note';
+            noteEl.dataset.id = note.id;
             noteEl.innerHTML = `
-                <h2>${note.title || '[Untitled]'}</h2>
-                <p>${note.body || '[Empty Body]'}</p>
+                <h2 class="note-title">${escapeHtml(note.title || '[Untitled]')}</h2>
+                <p class="note-body">${escapeHtml(note.body || '[Empty Body]')}</p>
             `;
             notesContainer.appendChild(noteEl);
+
+            enableInlineEditing(noteEl, note.id);
+        });
+    }
+
+    async function enableInlineEditing(noteEl, noteId) {
+        const titleEl = noteEl.querySelector('.note-title');
+
+        titleEl.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = titleEl.textContent;
+            input.className = 'note-title-input';
+            titleEl.replaceWith(input);
+            input.focus();
+
+            const save = async () => {
+                const newTitle = input.value.trim() || '[Untitled]';
+                const { error } = await supabaseClient
+                    .from('user-notes')
+                    .update({ title: newTitle })
+                    .eq('id', noteId);
+
+                if (error) {
+                    console.error('Update error:', error);
+                    alert('Failed to update title.');
+                }
+
+                const newTitleEl = document.createElement('h2');
+                newTitleEl.className = 'note-title';
+                newTitleEl.textContent = newTitle;
+                input.replaceWith(newTitleEl);
+
+                // Re-enable editing
+                enableInlineEditing(noteEl, noteId);
+            };
+
+            input.addEventListener('blur', save);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') input.blur();
+            });
         });
     }
 

@@ -1,11 +1,12 @@
-const CACHE_NAME = 'pwa-notes-cache-v5';
+const CACHE_NAME = 'pwa-notes-cache-v6';
 
 const PRECACHE_URLS = [
     '/pages/index.html',
     '/manifest.json',
     '/pages/profile.html',
     '/pages/newnote.html',
-    '/pages/viewnote.html'
+    '/pages/viewnote.html',
+    '/styles/viewnote.css',
 ];
 
 // installs pre-cache app shell
@@ -37,6 +38,20 @@ self.addEventListener('fetch', event => {
     if (request.method !== 'GET') return;
 
     const url = new URL(request.url);
+
+    // Handle CSS caching
+    if (request.destination === 'style') {
+        event.respondWith(
+            fetch(request)
+                .then(networkResponse => {
+                    const clone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+                    return networkResponse;
+                })
+                .catch(() => caches.match(request))
+        );
+        return;
+    }
 
     if (request.destination === 'script') {
         event.respondWith(
