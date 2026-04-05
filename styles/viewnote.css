@@ -1,0 +1,12 @@
+.note:hover {
+    cursor: pointer;
+    background: #eee;
+    border-radius: 15px;
+}
+
+@media screen and (min-width: 601px) {
+    .note {
+        margin: 5vw;
+        padding: 2.5vw 5vw 5vw;
+    }
+}

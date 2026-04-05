@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data: notes, error } = await supabaseClient
             .from('user-notes')
             .select('*')
-            .eq('user_id', userId)
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: false })
+            .eq('user_id', userId);
 
         if (error) {
             console.error('Fetch error:', error);
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const noteEl = document.createElement('div');
             noteEl.className = 'note';
             noteEl.innerHTML = `
-                <h2>${note.title || ''}</h2>
-                <p>${note.body || ''}</p>
+                <h2>${note.title || '[Untitled]'}</h2>
+                <p>${note.body || '[Empty Body]'}</p>
             `;
             notesContainer.appendChild(noteEl);
         });
