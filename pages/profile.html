@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Profile</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = "https://nyjhoaorgpjphivcufrz.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_MpypxsvXKiNT_-YPKcNS8g_TlX4jrLf";
+    </script>
+
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <div class="nav-buttons">
+        <a href="index.html"><button id="main-menu-btn">main menu</button></a>
+    </div>
+    <h1>New User? Sign up to save your notes.</h1>
+    <form id="signup">
+        <label for="newemail">Your Email: </label>
+        <input type="email" id="newemail" placeholder="ex. you@example.com" required>
+        <label for="newpassword">Your Password: </label>
+        <input type="password" id="newpassword" placeholder="Password">
+        <input type="submit" value="Sign Up">
+    </form>
+
+    <h1>Existing User? Log in to sync your notes.</h1>
+    <form id="login">
+        <label for="existemail">Your Email: </label>
+        <input type="email" id="existemail" placeholder="ex. you@example.com" required>
+        <label for="existpassword">Your Password: </label>
+        <input type="password" id="existpassword" placeholder="Password">
+        <input type="submit" value="Log In">
+    </form>
+</body>
+<script src="/scripts/pwa.js" defer></script>
+
+</html>

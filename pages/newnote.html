@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = "https://nyjhoaorgpjphivcufrz.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_MpypxsvXKiNT_-YPKcNS8g_TlX4jrLf";
+    </script>
+
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <div class="nav-buttons">
+        <a href="index.html"><button id="main-menu-btn">main menu</button></a>
+    </div>
+    <div class="new-note-class">
+        <form>
+            <label for="new-note-title"></label>
+            <input type="text" id="new-note-title" placeholder="title">
+            <label for="new-note-body"></label>
+            <input type="text" id="new-note-input" placeholder="start writing your new note...">
+            <input type="submit" value="create new note">
+        </form>
+    </div>
+</body>
+<script src="/scripts/newnote.js" defer></script>
+
+</html>
