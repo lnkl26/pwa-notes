@@ -3,22 +3,23 @@ if (!window.supabaseClient) {
 }
 const supabaseClient = window.supabaseClient;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const form = document.querySelector('.new-note-class form');
     const titleInput = document.getElementById('new-note-title');
     const bodyInput = document.getElementById('new-note-input');
 
+    // Get signed-in user
+    const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+    if (sessionError || !session) {
+        alert('You must be signed in to create notes.');
+        return;
+    }
+
+    const userId = session.user.id; // UUID string
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Get the signed-in user
-        const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
-        if (sessionError || !session) {
-            alert('You must be signed in to create a note.');
-            return;
-        }
-
-        const userId = session.user.id;
         const title = titleInput.value.trim();
         const body = bodyInput.value.trim();
 
@@ -29,15 +30,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Insert note
         const { data, error } = await supabaseClient
-            .from('notes')
-            .insert([{ user_id: userId, title, body }]);
+            .from('user-notes')
+            .insert([{
+                user_id: userId,       // UUID
+                title,
+                body,
+                created_at: new Date() // timestamp
+            }]);
 
         if (error) {
-            console.error(error);
+            console.error('Insert error:', error);
             alert('Failed to create note.');
         } else {
             alert('Note created successfully!');
-            // Optionally clear form
             titleInput.value = '';
             bodyInput.value = '';
         }
