@@ -40,11 +40,11 @@ label {
 }
 
 #signup-login-forms {
-    display: none;
+    display: block;
 }
 
 #account-info {
-    display: block;
+    display: none;
 }
 
 .email-input,

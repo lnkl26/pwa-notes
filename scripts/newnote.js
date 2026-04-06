@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const userId = session.user.id; // UUID string
+    // console.log(userId);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -30,12 +31,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Insert note
         const { data, error } = await supabaseClient
-            .from('user-notes')
+            .from('tbl_user_notes')
             .insert([{
-                user_id: userId,       // UUID
+                user_id: userId,
                 title,
                 body,
-                created_at: new Date() // timestamp
+                created_at: new Date()
             }]);
 
         if (error) {
