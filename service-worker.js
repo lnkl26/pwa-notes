@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-notes-cache-v7';
+const CACHE_NAME = 'pwa-notes-cache-v8';
 
 const PRECACHE_URLS = [
     '/index.html',
@@ -9,7 +9,11 @@ const PRECACHE_URLS = [
     '/styles/viewnote.css',
     '/styles/index.css',
     '/styles/assets/images/main-menu-bg.png',
-    '/styles/assets/images/pondering-title.png'
+    '/styles/assets/images/pondering-title.png',
+    '/styles/assets/images/icons/day-and-night.png',
+    '/styles/assets/images/icons/home-agreement.png',
+    '/styles/assets/images/icon/log-out.png',
+    '/styles/assets/images/userpfps/frog.png'
 ];
 
 // installs pre-cache app shell

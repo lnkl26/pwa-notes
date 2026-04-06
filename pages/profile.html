@@ -20,41 +20,59 @@
 </head>
 
 <body>
-    <div class="nav-buttons">
-        <a href="../index.html"><button id="main-menu-btn">main menu</button></a>
-    </div>
     <div class="signup-login-forms" id="signup-login-forms">
-        <h1>New User? Sign up to save your notes.</h1>
         <form id="signup">
-            <label for="newemail">Your Email: </label>
-            <input type="email" id="newemail" placeholder="ex. you@example.com" required>
-            <label for="newpassword">Your Password: </label>
-            <input type="password" id="newpassword" placeholder="Password">
-            <input type="submit" value="Sign Up">
+            <h1>New Ponderer?</h1>
+            <p>Create an account!</p>
+            <div class="email-input">
+                <label for="newemail">Your Email: </label>
+                <input type="email" id="newemail" placeholder="ex. you@example.com" required>
+            </div>
+            <div class="password-input">
+                <label for="newpassword">Your Password: </label>
+                <input type="password" id="newpassword" placeholder="Password">
+            </div>
+            <input class="submit-btn" type="submit" value="Sign Up">
         </form>
-
-        <h1>Existing User? Log in to sync your notes.</h1>
         <form id="login">
-            <label for="existemail">Your Email: </label>
-            <input type="email" id="existemail" placeholder="ex. you@example.com" required>
-            <label for="existpassword">Your Password: </label>
-            <input type="password" id="existpassword" placeholder="Password">
-            <input type="submit" value="Log In">
+            <h1>Existing Ponderer?</h1>
+            <p>Log in to see your notes!</p>
+            <div class="email-input">
+                <label for="existemail">Your Email: </label>
+                <input type="email" id="existemail" placeholder="ex. you@example.com" required>
+            </div>
+            <div class="password-input">
+                <label for="existpassword">Your Password: </label>
+                <input type="password" id="existpassword" placeholder="Password">
+            </div>
+            <input class="submit-btn" type="submit" value="Log In">
         </form>
     </div>
     <div class="friend-list" id="account-info">
-        <div>profile avatar placeholder</div>
-        <input type="text" placeholder="your display name">
-        <div>app settings/toggles placeholder</div>
-        <h1>Friends List</h1>
+        <div class="profile-container">
+            <div class="user-pfp">
+                <img src="../styles/assets/images/userpfps/frog.png">
+            </div>
+            <div class="user-display-name">
+                <input type="text" placeholder="Ponderer">
+            </div>
+        </div>
+        <div class="toggles">
+            <img src="../styles/assets/images/icons/day-and-night.png">
+            <img src="../styles/assets/images/icons/log-out.png">
+        </div>
         <div class="friends">
             <h2>Your Friends</h2>
         </div>
         <div class="pending">
-            <h2>Pending</h2>
+            <h2>Pending Friendships</h2>
         </div>
-        <div><button>placeholder log out button</button></div>
     </div>
+    <div class="nav-bar">
+        <a href="../index.html"><button id="main-menu-btn"><img class="icon" src="../styles/assets/images/icons/home-agreement.png"></button></a>
+    </div>
+
+
 </body>
 <script src="/scripts/profile.js" defer></script>
 

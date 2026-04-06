@@ -11,7 +11,21 @@ body {
     background-color: whitesmoke;
 }
 
-.nav-buttons button {
+form,
+input,
+button,
+label {
+    font-family: "CJ Bree", serif;
+}
+
+.nav-bar {
+    position: sticky;
+    border: none;
+    border-radius: 15px;
+    background: var(--light-green);
+}
+
+.nav-bar button {
     border: none;
     border-radius: 15px;
     background: var(--light-green);
@@ -19,41 +33,165 @@ body {
     color: darkgreen;
 }
 
-.nav-buttons button:hover {
+.nav-bar button:hover {
     cursor: pointer;
     background: darkgreen;
     color: var(--light-green);
 }
 
-#account-info {
+#signup-login-forms {
     display: none;
 }
 
+#account-info {
+    display: block;
+}
+
+.email-input,
+.password-input {
+    display: flex;
+}
+
+.email-input input,
+.password-input input {
+    border: none;
+    border-radius: 15px;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 15px;
+    background: var(--light-green);
+    width: 100%;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background: darkgreen;
+    color: var(--light-green);
+}
+
+.user-pfp,
+.user-display-name {
+    display: flex;
+    justify-content: center;
+}
+
+.user-pfp img {
+    border: 5px solid white;
+    border-radius: 50%;
+}
+
+.user-display-name input {
+    border: none;
+    background: none;
+    text-align: center;
+    width: 100%;
+}
+
+.toggles {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
 
 @media screen and (max-width: 600px) {
-
-    .nav-buttons {
+    .nav-bar {
         display: flex;
         justify-content: center;
-        padding: 25vw 0 0 0;
+        margin: 5vw 5vw 10vw;
+        padding: 2.5vw;
+        width: 85%;
+        top: 85%;
     }
 
-    .nav-buttons button {
-        padding: 2.5vw 5vw;
-        font-size: 1.5rem;
+    .nav-bar button {
+        padding: 2.5vw;
+    }
+
+    .icon {
+        max-width: 1rem;
+    }
+
+    #signup,
+    #login {
+        margin: 5vw;
+    }
+
+    #signup h1,
+    #login h1 {
+        font-size: 2rem;
+    }
+
+    .email-input,
+    .password-input {
+        padding: 1vw 0;
+        gap: 1vw;
+    }
+
+    .email-input input,
+    .password-input input {
+        padding: 1vw 3vw;
+        width: 100%;
+    }
+
+    .submit-btn {
+        padding: 2vw;
+        margin: 5vw 0;
+    }
+
+    .user-pfp img {
+        width: 50%;
+        margin: 5vw 0;
+    }
+
+    .user-display-name input {
+        font-size: 3rem;
+        margin: 0 5vw;
+    }
+
+    .toggles img {
+        width: 2rem;
+    }
+
+    .friends,
+    .pending {
+        margin: 0 5vw;
     }
 }
 
 @media screen and (min-width: 628px) {
-
-    .nav-buttons {
+    .nav-bar {
         display: flex;
         justify-content: center;
-        padding: 10vw 0 0 0;
+        margin: 5vw;
+        padding: 1.5vw;
+        top: 100%;
     }
 
-    .nav-buttons button {
-        padding: 1vw 2vw;
-        font-size: 1rem;
+    .icon {
+        max-width: 3rem;
+    }
+
+    .user-pfp {
+        margin: 5vw 0 0;
+    }
+
+    .user-display-name input {
+        font-size: 3rem;
+        width: 50%;
+    }
+
+    .user-pfp img {
+        width: 15%;
+    }
+
+    .toggles img {
+        width: 3rem;
+    }
+
+    .friends,
+    .pending {
+        margin: 0 5vw;
     }
 }
