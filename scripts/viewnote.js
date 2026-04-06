@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function enableInlineEditing(noteEl, noteId) {
         const titleEl = noteEl.querySelector('.note-title');
+        const bodyEl = noteEl.querySelector('.note-body');
 
         titleEl.addEventListener('click', () => {
             const input = document.createElement('input');
@@ -95,6 +96,42 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (e.key === 'Enter') input.blur();
             });
         });
+
+        bodyEl.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = bodyEl.textContent;
+            input.className = 'note-body-input';
+            bodyEl.replaceWith(input);
+            input.focus();
+
+            const save = async () => {
+                const newBody = input.value.trim() || '[Empty Body]';
+                const { error } = await supabaseClient
+                    .from('user-notes')
+                    .update({ body: newBody })
+                    .eq('id', noteId);
+
+                if (error) {
+                    console.error('Update error:', error);
+                    alert('Failed to update body.');
+                }
+
+                const newBodyEl = document.createElement('p');
+                newBodyEl.className = 'note-body';
+                newBodyEl.textContent = newBody;
+                input.replaceWith(newBodyEl);
+
+                // Re-enable editing
+                enableInlineEditing(noteEl, noteId);
+            };
+
+            input.addEventListener('blur', save);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') input.blur();
+            });
+
+        })
     }
 
     await loadNotes();

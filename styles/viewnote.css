@@ -1,7 +1,38 @@
-.note:hover {
-    cursor: pointer;
+body {
+    font-family: "BJ Cree", serif;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.note {
     background: #eee;
     border-radius: 15px;
+}
+
+.note-title:hover,
+.note-body:hover {
+    cursor: pointer;
+}
+
+.note-title-input {
+    border: none;
+    border-radius: 15px;
+    background: none;
+    font-size: 2rem;
+    font-family: "BJ Cree", serif;
+    font-weight: 700;
+    width: 100%;
+}
+
+.note-body-input {
+    border: none;
+    border-radius: 15px;
+    background: none;
+    font-size: 1rem;
+    font-family: "BJ Cree", serif;
+    width: 100%;
 }
 
 @media screen and (min-width: 601px) {
