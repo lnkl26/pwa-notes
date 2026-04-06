@@ -1,0 +1,91 @@
+:root {
+    --light-green: rgb(148, 200, 128);
+    --dark-cyan: rgb(47, 79, 105);
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-family: "CJ Bree", serif;
+    background-color: var(--dark-cyan);
+}
+
+.nav-buttons button {
+    border: none;
+    border-radius: 15px;
+    background: var(--light-green);
+    font-family: "CJ Bree", serif;
+    color: darkgreen;
+}
+
+.nav-buttons button:hover {
+    cursor: pointer;
+    background: darkgreen;
+    color: var(--light-green);
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+
+    .bg {
+        background-image: url(assets/images/main-menu-bg.png);
+        height: 100%;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        padding: 25vw 0 0 0;
+    }
+
+    .logo img {
+        max-width: 70%;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        padding: 25vw 0 0 0;
+    }
+
+    .nav-buttons button {
+        padding: 2.5vw 5vw;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 628px) {
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        padding: 5vw 0 0 0;
+    }
+
+    .logo img {
+        max-width: 25%;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        padding: 10vw 0 0 0;
+    }
+
+    .nav-buttons button {
+        padding: 1vw 2vw;
+        font-size: 1rem;
+    }
+}

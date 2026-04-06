@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // console.log("Logged in:", data.session.user.email);
       const formsId = document.getElementById('signup-login-forms');
       formsId.style.display = 'none';
+      const accountInfo = document.getElementById('account-info');
+      accountInfo.style.display = 'block';
     }
   });
 

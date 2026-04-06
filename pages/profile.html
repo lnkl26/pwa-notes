@@ -11,12 +11,17 @@
         const SUPABASE_ANON_KEY = "sb_publishable_MpypxsvXKiNT_-YPKcNS8g_TlX4jrLf";
     </script>
 
+    <link rel="stylesheet" href="../styles/profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BJ+Cree:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
     <div class="nav-buttons">
-        <a href="index.html"><button id="main-menu-btn">main menu</button></a>
+        <a href="../index.html"><button id="main-menu-btn">main menu</button></a>
     </div>
     <div class="signup-login-forms" id="signup-login-forms">
         <h1>New User? Sign up to save your notes.</h1>
@@ -37,8 +42,10 @@
             <input type="submit" value="Log In">
         </form>
     </div>
-    <div class="friend-list">
+    <div class="friend-list" id="account-info">
+        <div>profile avatar placeholder</div>
         <input type="text" placeholder="your display name">
+        <div>app settings/toggles placeholder</div>
         <h1>Friends List</h1>
         <div class="friends">
             <h2>Your Friends</h2>
@@ -46,6 +53,7 @@
         <div class="pending">
             <h2>Pending</h2>
         </div>
+        <div><button>placeholder log out button</button></div>
     </div>
 </body>
 <script src="/scripts/profile.js" defer></script>

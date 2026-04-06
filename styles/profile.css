@@ -1,0 +1,59 @@
+:root {
+    --light-green: rgb(148, 200, 128);
+    --dark-cyan: rgb(47, 79, 105);
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-family: "CJ Bree", serif;
+    background-color: whitesmoke;
+}
+
+.nav-buttons button {
+    border: none;
+    border-radius: 15px;
+    background: var(--light-green);
+    font-family: "CJ Bree", serif;
+    color: darkgreen;
+}
+
+.nav-buttons button:hover {
+    cursor: pointer;
+    background: darkgreen;
+    color: var(--light-green);
+}
+
+#account-info {
+    display: none;
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        padding: 25vw 0 0 0;
+    }
+
+    .nav-buttons button {
+        padding: 2.5vw 5vw;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 628px) {
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        padding: 10vw 0 0 0;
+    }
+
+    .nav-buttons button {
+        padding: 1vw 2vw;
+        font-size: 1rem;
+    }
+}
