@@ -7,6 +7,7 @@ PWA for note-taking.
 - I need to figure out the UI/UX for how users will archive an delete their notes. Considering "swiping" or utilizing buttons.
 - [20260406] Testing styling. Finished styling on mobile layout for main menu (desktop layout is in progress). Mobile and desktop layout is in progress for Account/Profile/Settings menu. Added additional placeholder content on Account/Profile/Settings menu. 
 - Users are able to delete notes permanently.
+- Users are able to change and update their Display Name.
 
 ## Features
 | # Feature Name | Date Added | Status | Notes |
