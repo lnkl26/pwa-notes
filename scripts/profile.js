@@ -149,4 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     alert('Display name updated successfully!');
   });
+
+  // logging out handler
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) {
+      alert('Error logging out:' + error.message);
+    } else {
+      alert('Logged out successfully.');
+      window.location.reload(); 
+    }
+  });
 });

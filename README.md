@@ -8,12 +8,13 @@ PWA for note-taking.
 - [20260406] Testing styling. Finished styling on mobile layout for main menu (desktop layout is in progress). Mobile and desktop layout is in progress for Account/Profile/Settings menu. Added additional placeholder content on Account/Profile/Settings menu. 
 - Users are able to delete notes permanently.
 - Users are able to change and update their Display Name.
+- Users are able to log out of their accounts.
 
 ## Features
 | # Feature Name | Date Added | Status | Notes |
 | --- | --- | --- | --- |
 | 1 Account Creation & Sync | 20260405 | WORKING | User can create an account based on their email and password. To sync data, users have to log in with the same credentials. |
-| 2 Account Log Out & Deletion | PLANNED | PLANNED | Users can log out of their account on their device or delete their account entirely. |
+| 2 Account Log Out & Deletion | 20260408 | IN PROGRESS | Users can log out of their account on their device or delete their account entirely. |
 | 3 Offline Usability | 20260405 | IN PROGRESS | User is able to create, view, update, and delete notes offline. |
 | 4 Note Creation | 20260405 | WORKING | User can create a simple text note with a title and body. |
 | 5 Note In-Line Updating | 20260405 | WORKING | User can click/tap the the title or body to update its content. |
