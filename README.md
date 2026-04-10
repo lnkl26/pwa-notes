@@ -22,6 +22,7 @@ PWA for note-taking.
 | 7 Note Tagging | PLANNED | PLANNED | Users are able to create tags, and apply none, one, or multiple to a note. |
 | 8 Timed Notes | PLANNED | PLANNED | Users can place a "due time" on notes. Once the due time arrives, the user will receive a notification. |
 | 9 Note Sharing | PLANNED | PLANNED | Users can befriend other users to share notes. Shared users can view existing notes. | 
+| 10 User Display Name | 20260408 | WORKING | Users can change their display name. |
 
 
 ## Bugs
