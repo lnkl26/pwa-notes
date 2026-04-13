@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       alert('Logged in successfully!');
       console.log('Logged in user:', data.user);
+      window.location.reload(); 
 
       const { data: userInfo, error: userInfoError } = await supabaseClient
         .from('tbl_user_info')
@@ -156,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (error) {
       alert('Error logging out:' + error.message);
     } else {
-      alert('Logged out successfully.');
+      // alert('Logged out successfully.');
       window.location.reload(); 
     }
   });

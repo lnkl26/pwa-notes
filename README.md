@@ -30,4 +30,4 @@ PWA for note-taking.
 | --- | --- | --- | --- |
 | 1 | 20260405 | 20260406 | Notes are being created and populated in Supabase database, but it is not showing on all user created notes. Seemingly only shows the first one. [**FIXED**] Syntax error in JavaScript file. |
 | 2 | 20260406 | 20260406 | Notes list no longer updating after new delete function. New notes no longer appear after new delete function. In-line editing no longer saves. [**FIXED**] Not really a coding bug, the browser wasn't updating the code correctly, switched to private browsing everything is fine and dandy. |
-| 3 | 20260413 | IN PROGRESS | Logging in, doesn't immediately show the user profile. The page must be reloaded in order to show the correct screen. |
+| 3 | 20260413 | 20260613 | Logging in, doesn't immediately show the user profile. The page must be reloaded in order to show the correct screen. [**FIXED**] Missing `window.location.reload();` in logging in function. |
