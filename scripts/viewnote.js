@@ -24,31 +24,56 @@ document.addEventListener('DOMContentLoaded', async () => {
         notesContainer.innerHTML = '';
 
         if (notes.length > 0) {
+            const archivedNotes = [];
             notes.forEach(note => {
                 const noteElement = document.createElement('div');
-                noteElement.className = 'note';
+                noteElement.className = `note${note.archived ? ' archived' : ''}`;
                 noteElement.innerHTML = `
                     <h3 class="note-title">${note.title || "[Untitled]"}</h3>
                     <p class="note-body">${note.body || "[Empty Body]"}</p>
                     <small>Created at: ${new Date(note.created_at).toLocaleString()}</small>
                     <button class="delete-btn" data-id="${note.id}">Delete</button>
-                    <button class="archive-btn" data-id="${note.id}">Archive</button>
+                    <button class="archive-btn" data-id="${note.id}">${note.archived ? 'Unarchive' : 'Archive'}</button>
                 `;
-                notesContainer.appendChild(noteElement);
 
-                // Add delete event listener
-                noteElement.querySelector('.delete-btn').addEventListener('click', async () => {
-                    const confirmDelete = confirm('Are you sure you want to delete this note?');
-                    if (confirmDelete) {
-                        await deleteNote(note.id);
-                    }
-                });
+                if (note.archived) {
+                    archivedNotes.push(noteElement);
+                } else {
+                    notesContainer.appendChild(noteElement);
 
-                // Enable inline editing
-                enableInlineEditing(noteElement, note.id);
+                    // Add delete event listener
+                    noteElement.querySelector('.delete-btn').addEventListener('click', async () => {
+                        const confirmDelete = confirm('Are you sure you want to delete this note?');
+                        if (confirmDelete) {
+                            await deleteNote(note.id);
+                        }
+                    });
+
+                    // Enable inline editing
+                    enableInlineEditing(noteElement, note.id);
+                    
+                    // Add archive/unarchive event listener
+                    noteElement.querySelector('.archive-btn').addEventListener('click', async () => {
+                        if (note.archived) {
+                            await unarchiveNote(note.id);
+                        } else {
+                            await archiveNote(note.id);
+                        }
+                    });
+                }
             });
+
+            // Render archived notes at the bottom
+            if (archivedNotes.length > 0) {
+                const archivedContainer = document.createElement('div');
+                archivedContainer.id = 'archived-notes-container';
+                archivedContainer.innerHTML = '<h3>Archived Notes</h3>';
+                archivedNotes.forEach(archivedNote => archivedContainer.appendChild(archivedNote));
+                notesContainer.appendChild(archivedContainer);
+            }
+
         } else {
-            notesContainer.innerHTML = '<p>No notes available.</p>';
+            notesContainer.innerHTML = '<p>No archived notes available.</p>';
         }
 
     } catch (error) {
@@ -63,19 +88,60 @@ async function deleteNote(noteId) {
         const { error } = await supabaseClient
             .from('tbl_user_notes')
             .delete()
-            .eq('id', noteId); // Use the note ID to find the correct note
+            .eq('id', noteId);
 
         if (error) {
             console.error('Delete error:', error);
             alert('Failed to delete note.');
         } else {
             alert('Note deleted successfully!');
-            // Refresh notes after deletion
-            location.reload(); // Reloads the page to show updated notes
+            location.reload();
         }
     } catch (error) {
         console.error('Error deleting note:', error);
         alert('Failed to delete note.');
+    }
+}
+
+// Function to archive a note
+async function archiveNote(noteId) {
+    try {
+        const { error } = await supabaseClient
+            .from('tbl_user_notes')
+            .update({ col_archived: true })
+            .eq('id', noteId);
+
+        if (error) {
+            console.error('Archive error:', error);
+            alert('Failed to archive note.');
+        } else {
+            alert('Note archived successfully!');
+            location.reload();
+        }
+    } catch (error) {
+        console.error('Error archiving note:', error);
+        alert('Failed to archive note.');
+    }
+}
+
+// Function to unarchive a note
+async function unarchiveNote(noteId) {
+    try {
+        const { error } = await supabaseClient
+            .from('tbl_user_notes')
+            .update({ col_archived: false })
+            .eq('id', noteId);
+
+        if (error) {
+            console.error('Unarchive error:', error);
+            alert('Failed to unarchive note.');
+        } else {
+            alert('Note unarchived successfully!');
+            location.reload();
+        }
+    } catch (error) {
+        console.error('Error unarchiving note:', error);
+        alert('Failed to unarchive note.');
     }
 }
 
@@ -109,7 +175,6 @@ async function enableInlineEditing(noteEl, noteId) {
             newTitleEl.textContent = newTitle;
             input.replaceWith(newTitleEl);
 
-            // Re-enable editing
             enableInlineEditing(noteEl, noteId);
         };
 
@@ -144,7 +209,6 @@ async function enableInlineEditing(noteEl, noteId) {
             newBodyEl.textContent = newBody;
             input.replaceWith(newBodyEl);
 
-            // Re-enable editing
             enableInlineEditing(noteEl, noteId);
         };
 

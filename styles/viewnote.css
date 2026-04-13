@@ -35,9 +35,14 @@ h2 {
     width: 100%;
 }
 
-/* .archive-btn {
-    background: none;
-} */
+#archived-notes-container {
+    background: green;
+}
+
+.note.archived {
+    background: green;
+    opacity: 0.5;
+}
 
 @media screen and (min-width: 601px) {
     .note {
