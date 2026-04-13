@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <p class="note-body">${note.body}</p>
                     <small>Created at: ${new Date(note.created_at).toLocaleString()}</small>
                     <button class="delete-btn" data-id="${note.id}">Delete</button>
+                    <button class="archive-btn" data-id="${note.id}">Archive</button>
                 `;
                 notesContainer.appendChild(noteElement);
 
