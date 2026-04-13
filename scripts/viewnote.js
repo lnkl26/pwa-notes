@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const archivedNotes = [];
             notes.forEach(note => {
                 const noteElement = document.createElement('div');
-                noteElement.className = `note${note.archived ? ' archived' : ''}`;
+                noteElement.className = `note${note.col_archived ? ' archived' : ''}`;
                 noteElement.innerHTML = `
                     <h3 class="note-title">${note.title || "[Untitled]"}</h3>
                     <p class="note-body">${note.body || "[Empty Body]"}</p>
                     <small>Created at: ${new Date(note.created_at).toLocaleString()}</small>
                     <button class="delete-btn" data-id="${note.id}">Delete</button>
-                    <button class="archive-btn" data-id="${note.id}">${note.archived ? 'Unarchive' : 'Archive'}</button>
+                    <button class="archive-btn" data-id="${note.id}">${note.col_archived ? 'Unarchive' : 'Archive'}</button>
                 `;
 
                 if (note.archived) {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     
                     // Add archive/unarchive event listener
                     noteElement.querySelector('.archive-btn').addEventListener('click', async () => {
-                        if (note.archived) {
+                        if (note.col_archived) {
                             await unarchiveNote(note.id);
                         } else {
                             await archiveNote(note.id);
