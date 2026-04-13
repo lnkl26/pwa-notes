@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const noteElement = document.createElement('div');
                 noteElement.className = 'note';
                 noteElement.innerHTML = `
-                    <h3 class="note-title">${note.title}</h3>
-                    <p class="note-body">${note.body}</p>
+                    <h3 class="note-title">${note.title || "[Untitled]"}</h3>
+                    <p class="note-body">${note.body || "[Empty Body]"}</p>
                     <small>Created at: ${new Date(note.created_at).toLocaleString()}</small>
                     <button class="delete-btn" data-id="${note.id}">Delete</button>
                     <button class="archive-btn" data-id="${note.id}">Archive</button>
