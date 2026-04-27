@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Signup form handler
+  // signup form handler
   document.getElementById('signup').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('newemail').value;
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Login form handler
+  // login form handler
   document.getElementById('login').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('existemail').value;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Update Display Name handler
+  // update display name handler
   document.getElementById('updateDisplayNameBtn').addEventListener('click', async () => {
     const newDisplayName = document.getElementById('userDisplayName').value;
 
@@ -163,4 +163,118 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.reload(); 
     }
   });
+
+  // friend requesting
+  document.getElementById('friend-request-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const friendEmail = document.getElementById('friendEmail').value;
+    
+    console.log('Friend Email:', friendEmail);
+
+    const { data: potentialFriend } = await supabaseClient
+      .from('tbl_user_info')
+      .select('id')
+      .eq('col_user_email', friendEmail)
+      .single();
+    
+    if (potentialFriend) {
+      console.log('Found potential friend:', potentialFriend);
+    } else {
+      console.log('No friend found with this email:', friendEmail);
+    }
+
+    if (potentialFriend.error) {
+      console.error('Database query error:', potentialFriend.error);
+    }
+
+
+    
+    if(!potentialFriend) {
+      alert('no user connected with this email');
+      return;
+    }
+
+    const { data, error } = await supabaseClient.from('tbl_friend_requests').insert([{ col_sender_id: user.id, col_reciever_id: potentialFriend.id, col_request_status: 'pending' }]);
+
+    if (error) {
+      console.error('error sending request', error);
+      alert('failed to send request');
+    } else {
+      alert('friend request sent');
+      document.getElementById(friendEmail).value = '';
+      loadOutgoingRequest();
+    }
+  });
+
+  async function loadOutgoingRequests() {
+    const { data: outgoingRequests } = await supabaseClient
+        .from('tbl_friend_requests')
+        .select('col_receiver_id, col_request_status')
+        .eq('col_sender_id', user.id)
+        .eq('col_request_status', 'pending');
+
+    const outgoingContainer = document.querySelector('.outgoing-pending');
+    outgoingContainer.innerHTML = '';
+
+    outgoingRequests.forEach(async (request) => {
+        const receiverInfo = await getUserInfo(request.receiver_id); // You will need this function
+        outgoingContainer.innerHTML += `<div>${receiverInfo.display_name} (Pending)</div>`;
+    });
+  }
+
+  async function loadIncomingRequests() {
+      const { data: incomingRequests } = await supabaseClient
+          .from('tbl_friend_requests')
+          .select('col_sender_id, col_request_status')
+          .eq('col_receiver_id', user.id)
+          .eq('col_request_status', 'pending');
+
+      const incomingContainer = document.querySelector('.incoming-pending');
+      incomingContainer.innerHTML = '';
+
+      incomingRequests.forEach(async (request) => {
+          const senderInfo = await getUserInfo(request.sender_id); // You will need this function
+          incomingContainer.innerHTML += `
+              <div>
+                  ${senderInfo.display_name} (Pending)
+                  <button onclick="acceptFriendRequest('${request.sender_id}')">Accept</button>
+                  <button onclick="declineFriendRequest('${request.sender_id}')">Decline</button>
+              </div>`;
+      });
+  }
+
+  // async function acceptFriendRequest(senderId) {
+  //   const { error } = await supabaseClient
+  //       .from('friend_requests')
+  //       .update({ status: 'accepted' })
+  //       .eq('sender_id', senderId)
+  //       .eq('receiver_id', user.id);
+
+  //   if (error) {
+  //       alert('Error accepting request: ' + error.message);
+  //   } else {
+  //       alert('Friend request accepted!');
+  //       loadIncomingRequests(); // Refresh incoming requests
+  //       loadOutgoingRequests(); // Refresh outgoing requests
+  //   }
+  // }
+
+  // async function declineFriendRequest(senderId) {
+  //   const { error } = await supabaseClient
+  //       .from('friend_requests')
+  //       .delete()
+  //       .eq('sender_id', senderId)
+  //       .eq('receiver_id', user.id);
+
+  //   if (error) {
+  //       alert('Error declining request: ' + error.message);
+  //   } else {
+  //       alert('Friend request declined!');
+  //       loadIncomingRequests(); // Refresh incoming requests
+  //   }
+  // }
+
+  // await loadOutgoingRequests();
+  // await loadIncomingRequests();
+
 });

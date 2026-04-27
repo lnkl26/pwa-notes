@@ -58,11 +58,23 @@
             <button id="logoutBtn"><img src="../styles/assets/images/icons/log-out.png"></button>
             
         </div>
+        <h2>Your Friends</h2>
         <div class="friends">
-            <h2>Your Friends</h2>
         </div>
+        <h2>Pending Friendships</h2>
         <div class="pending">
-            <h2>Pending Friendships</h2>
+            <form id="friend-request-form">
+                <input type="text" id="friendEmail" placeholder="Add new friends by email">
+                <input type="submit" value="Send Request">
+            </form>
+            <div class="list-of-pending">
+                <div class="incoming-pending">
+                    <h3>Incoming Requests</h3>
+                </div>
+                <div class="outgoing-pending">
+                    <h3>Outgoing Requests</h3>
+                </div>
+            </div>
         </div>
     </div>
     <div class="nav-bar">
